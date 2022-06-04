@@ -19,9 +19,11 @@ func helloRequestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	fileServer := http.FileServer(http.Dir("/public"))
 	//
 	// requwst handler
 	//
+	http.Handle("/", fileServer)
 	http.HandleFunc("/hello", helloRequestHandler)
 
 	fmt.Printf("Starting server on port 8080\n")
